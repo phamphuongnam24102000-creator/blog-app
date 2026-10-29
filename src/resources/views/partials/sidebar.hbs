@@ -1,0 +1,44 @@
+<!-- views/partials/sidebar.hbs -->
+<aside class="d-flex flex-column gap-4 sidebar">
+  <div class="card border-0 shadow-sm">
+    <div class="card-body">
+      <h2 class="h6 fw-bold mb-3"><i class="bi bi-fire text-danger me-2"></i>Đọc nhiều nhất</h2>
+      <ol class="list-unstyled mb-0 popular-list">
+        {{#each popular}}
+          <li class="d-flex gap-3 py-2">
+            <span class="popular-rank">{{inc @index}}</span>
+            <div>
+              <a href="#" class="fw-semibold text-body d-block lh-sm mb-1">{{title}}</a>
+              <span class="small text-body-secondary"><i class="bi bi-eye me-1"></i>{{formatNumber views}} lượt xem</span>
+            </div>
+          </li>
+        {{/each}}
+      </ol>
+    </div>
+  </div>
+
+  <div class="card border-0 shadow-sm">
+    <div class="card-body">
+      <h2 class="h6 fw-bold mb-3"><i class="bi bi-tags text-primary me-2"></i>Chuyên mục</h2>
+      <div class="d-flex flex-wrap gap-2">
+        {{#each categories}}
+          <a href="/news" class="btn btn-sm btn-outline-secondary rounded-pill">
+            {{name}} <span class="badge text-bg-secondary ms-1">{{count}}</span>
+          </a>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+
+  <div class="card border-0 newsletter-card text-white">
+    <div class="card-body p-4">
+      <i class="bi bi-envelope-paper fs-2 mb-2 d-block"></i>
+      <h2 class="h5 fw-bold">Không bỏ lỡ bài mới</h2>
+      <p class="small text-white-50">Mỗi tuần một email, không spam.</p>
+      <form onsubmit="event.preventDefault(); this.reset(); alert('Cảm ơn bạn đã đăng ký!');">
+        <input type="email" class="form-control mb-2" placeholder="Email của bạn" required>
+        <button class="btn btn-light w-100 fw-semibold">Đăng ký</button>
+      </form>
+    </div>
+  </div>
+</aside>

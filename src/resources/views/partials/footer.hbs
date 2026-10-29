@@ -1,4 +1,48 @@
 <!-- views/partials/footer.hbs -->
-<footer>
-  <p>© 2026 Blog App</p>
+<footer class="site-footer mt-5 pt-5 pb-4">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <a class="d-flex align-items-center gap-2 fw-bold fs-5 mb-3 text-white" href="/">
+          <img src="/img/logo.png" alt="" width="32" height="32" class="rounded">
+          <span>Blog<span class="text-primary">App</span></span>
+        </a>
+        <p class="text-white-50 mb-3">Chia sẻ kiến thức lập trình web: JavaScript, Node.js, bảo mật và kiến trúc hệ thống — viết dễ hiểu cho người mới.</p>
+        <div class="d-flex gap-2">
+          <a href="#" class="social-btn" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-btn" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          <a href="#" class="social-btn" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <h6 class="text-white mb-3">Khám phá</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a href="/">Trang chủ</a></li>
+          <li><a href="/news">Tin tức</a></li>
+          <li><a href="#">Giới thiệu</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <h6 class="text-white mb-3">Chuyên mục</h6>
+        <ul class="list-unstyled footer-links">
+          {{#each categories}}
+            <li><a href="/news">{{name}}</a></li>
+          {{/each}}
+        </ul>
+      </div>
+
+      <div class="col-lg-3">
+        <h6 class="text-white mb-3">Nhận bài mới qua email</h6>
+        <form class="d-flex gap-2" onsubmit="event.preventDefault(); this.reset(); alert('Cảm ơn bạn đã đăng ký!');">
+          <input type="email" class="form-control form-control-sm" placeholder="Email của bạn" required>
+          <button class="btn btn-sm btn-primary text-nowrap">Đăng ký</button>
+        </form>
+      </div>
+    </div>
+
+    <hr class="border-secondary my-4">
+    <p class="text-white-50 small mb-0 text-center">© {{year}} Blog App. Làm bằng Express + Handlebars + Bootstrap.</p>
+  </div>
 </footer>

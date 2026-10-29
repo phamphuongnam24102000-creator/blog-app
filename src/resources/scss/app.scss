@@ -1,0 +1,203 @@
+// Biên dịch sang src/public/css/app.css bằng: npm run watch
+// Bootstrap lo phần lớn giao diện; file này chỉ thêm những gì Bootstrap không có sẵn.
+
+@use "sass:color";
+
+// ================= BIẾN =================
+$brand: #4f46e5;          // tím chàm
+$brand-2: #0ea5e9;        // xanh trời
+$footer-bg: #0f172a;
+
+:root {
+  --bs-primary: #{$brand};
+  --bs-primary-rgb: 79, 70, 229;
+  --bs-link-color: #{$brand};
+  --bs-link-hover-color: #{color.adjust($brand, $lightness: -10%)};
+  --bs-body-font-family: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --hero-gradient: linear-gradient(135deg, #{$brand} 0%, #{$brand-2} 100%);
+}
+
+[data-bs-theme="dark"] {
+  --bs-body-bg: #0b1120;
+  --bs-tertiary-bg: #111827;
+  --bs-primary-rgb: 129, 140, 248;
+  --bs-link-color: #818cf8;
+  --bs-link-hover-color: #a5b4fc;
+  .card { --bs-card-bg: #111827; }
+}
+
+// Bootstrap gán màu nút primary bằng biến riêng → ghi đè cho đồng bộ màu thương hiệu
+.btn-primary {
+  --bs-btn-bg: #{$brand};
+  --bs-btn-border-color: #{$brand};
+  --bs-btn-hover-bg: #{color.adjust($brand, $lightness: -8%)};
+  --bs-btn-hover-border-color: #{color.adjust($brand, $lightness: -8%)};
+  --bs-btn-active-bg: #{color.adjust($brand, $lightness: -12%)};
+}
+.pagination { --bs-pagination-active-bg: #{$brand}; --bs-pagination-active-border-color: #{$brand}; }
+
+a { text-decoration: none; }
+
+// ================= NAVBAR =================
+.navbar .nav-link {
+  font-weight: 500;
+  &.active { color: var(--bs-primary) !important; }
+}
+
+// Nút sáng/tối: chỉ hiện icon phù hợp
+.theme-icon-light { display: none; }
+[data-bs-theme="dark"] {
+  .theme-icon-light { display: inline; }
+  .theme-icon-dark { display: none; }
+}
+
+// ================= AVATAR =================
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--hero-gradient);
+  color: #fff;
+  font-weight: 700;
+  font-size: .8rem;
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+
+  &.avatar-sm { width: 22px; height: 22px; font-size: .7rem; }
+}
+
+// ================= HERO =================
+.hero {
+  background: var(--hero-gradient);
+  position: relative;
+  overflow: hidden;
+
+  // 2 vòng tròn mờ trang trí
+  &::before, &::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .08);
+  }
+  &::before { width: 420px; height: 420px; top: -160px; right: -120px; }
+  &::after  { width: 260px; height: 260px; bottom: -120px; left: -80px; }
+
+  .container { position: relative; z-index: 1; }
+}
+
+.featured-card {
+  transition: transform .3s ease;
+  &:hover { transform: translateY(-6px) rotate(-.5deg); }
+}
+
+// ================= THỐNG KÊ =================
+.stats-strip {
+  margin-top: -2rem;          // đè nhẹ lên hero
+  position: relative;
+  z-index: 2;
+}
+.stat-box {
+  background: var(--bs-body-bg);
+  border-radius: 1rem;
+  padding: 1.25rem .5rem;
+  box-shadow: 0 .5rem 1.5rem rgba(15, 23, 42, .08);
+}
+.stat-num {
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: var(--hero-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.stat-label { color: var(--bs-secondary-color); font-size: .875rem; }
+
+// ================= THẺ BÀI VIẾT =================
+.card { border-radius: 1rem; }
+
+.post-card, .post-row {
+  transition: transform .25s ease, box-shadow .25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 1rem 2rem rgba(15, 23, 42, .12) !important;
+    .card-title a, h2 a { color: var(--bs-primary) !important; }
+    .post-thumb img { transform: scale(1.06); }
+  }
+}
+
+.post-thumb {
+  overflow: hidden;
+  border-radius: 1rem 1rem 0 0;
+  img { transition: transform .5s ease; }
+}
+.post-row .post-thumb { border-radius: 0; min-height: 200px; }
+
+// Cắt tiêu đề/mô tả quá dài thành tối đa 2 / 3 dòng
+.post-card .card-title a, .post-row h2 a {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.post-card .card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// ================= SIDEBAR =================
+.sidebar { position: sticky; top: 84px; }
+
+.popular-list li + li { border-top: 1px dashed var(--bs-border-color); }
+.popular-rank {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+  min-width: 1.5rem;
+  color: rgba(var(--bs-primary-rgb), .35);
+}
+.popular-list a:hover { color: var(--bs-primary) !important; }
+
+.newsletter-card {
+  background: var(--hero-gradient);
+  overflow: hidden;
+}
+
+// ================= TRANG TIN TỨC =================
+.page-header {
+  background: var(--hero-gradient);
+  .breadcrumb { --bs-breadcrumb-divider-color: rgba(255, 255, 255, .5); }
+}
+
+// ================= FOOTER =================
+.site-footer {
+  background: $footer-bg;
+  color: rgba(255, 255, 255, .75);
+}
+.footer-links li { margin-bottom: .5rem; }
+.footer-links a {
+  color: rgba(255, 255, 255, .6);
+  &:hover { color: #fff; }
+}
+.social-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  background: rgba(255, 255, 255, .08);
+  color: #fff;
+  transition: background .2s;
+  &:hover { background: $brand; color: #fff; }
+}
+
+// ================= RESPONSIVE =================
+@media (max-width: 991.98px) {
+  .sidebar { position: static; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}

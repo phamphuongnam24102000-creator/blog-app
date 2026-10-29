@@ -1,3 +1,76 @@
 <!-- views/home.hbs -->
-<h1>Trang chủ</h1>
-<p>Chào mừng đến với blog!</p>
+
+<!-- HERO -->
+<section class="hero py-5">
+  <div class="container py-lg-4">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="badge rounded-pill text-bg-light text-primary mb-3 px-3 py-2">
+          <i class="bi bi-stars me-1"></i>Xin chào, {{name}}!
+        </span>
+        <h1 class="display-5 fw-bold text-white mb-3">Học lập trình web<br>dễ hiểu, thực tế.</h1>
+        <p class="lead text-white-50 mb-4">Bài viết về JavaScript, Node.js, bảo mật và kiến trúc hệ thống — kèm ví dụ chạy được ngay.</p>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="/news" class="btn btn-light btn-lg fw-semibold px-4">Đọc bài mới <i class="bi bi-arrow-right ms-1"></i></a>
+          {{#if isAdmin}}
+            <a href="#" class="btn btn-outline-light btn-lg px-4"><i class="bi bi-pencil-square me-1"></i>Viết bài</a>
+          {{/if}}
+        </div>
+      </div>
+
+      <!-- Bài nổi bật -->
+      <div class="col-lg-6">
+        {{#with featured}}
+          <article class="card featured-card border-0 shadow-lg overflow-hidden">
+            <div class="ratio ratio-16x9">
+              <img src="{{image}}" alt="" class="object-fit-cover">
+            </div>
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center gap-2 mb-2">
+                <span class="badge text-bg-warning"><i class="bi bi-star-fill me-1"></i>Nổi bật</span>
+                <span class="badge rounded-pill text-bg-primary bg-opacity-10 text-primary">{{category}}</span>
+              </div>
+              <h2 class="h4 fw-bold"><a href="#" class="stretched-link text-body">{{title}}</a></h2>
+              <p class="text-body-secondary mb-0">{{excerpt}}</p>
+            </div>
+          </article>
+        {{/with}}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THỐNG KÊ NHANH -->
+<section class="container stats-strip">
+  <div class="row g-3 text-center">
+    <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">{{posts.length}}+</div><div class="stat-label">Bài viết mới</div></div></div>
+    <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">{{categories.length}}</div><div class="stat-label">Chuyên mục</div></div></div>
+    <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">5K+</div><div class="stat-label">Lượt đọc</div></div></div>
+    <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">100%</div><div class="stat-label">Miễn phí</div></div></div>
+  </div>
+</section>
+
+<!-- BÀI MỚI + SIDEBAR -->
+<section class="container py-5">
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+          <h2 class="fw-bold mb-1">Bài viết mới</h2>
+          <p class="text-body-secondary mb-0">Cập nhật kiến thức mỗi tuần</p>
+        </div>
+        <a href="/news" class="btn btn-link text-decoration-none fw-semibold">Xem tất cả <i class="bi bi-arrow-right"></i></a>
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        {{#each posts}}
+          <div class="col">{{> post-card}}</div>
+        {{/each}}
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      {{> sidebar}}
+    </div>
+  </div>
+</section>
